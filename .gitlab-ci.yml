@@ -4,7 +4,7 @@ docker-build-master:
   services:
     - docker
   before_script:
-    - docker build -t princearoraaws/docker-react -f ./Dockerfile.dev .
+    - docker build -t princearoraaws/docker-react -f Dockerfile.dev .
   script:
     - docker run -e CI=true princearoraaws/docker-react npm run test
   only:
