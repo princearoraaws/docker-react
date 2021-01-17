@@ -1,5 +1,5 @@
 docker-build-master:
-  # Official docker image.
+  # Official docker image
   variables:
     DOCKER_HOST: tcp://localhost:2375
 
