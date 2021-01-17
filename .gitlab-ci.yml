@@ -10,8 +10,8 @@ docker-build-master:
     - docker build -t princearoraaws/docker-react -f Dockerfile.dev .
     - echo job finished
     
-  #script:
-    #- docker run -e CI=true princearoraaws/docker-react npm run test
+  script:
+    - docker run -e CI=true princearoraaws/docker-react npm run test
   only:
     - master
   tags:
