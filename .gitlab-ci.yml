@@ -3,10 +3,10 @@ docker-build-master:
   variables:
     DOCKER_HOST: tcp://localhost:2375
 
-  image: docker:latest
+  image: docker:19.03.12
   stage: build
   services:
-    - docker:18.09.7-dind
+    - docker:19.03.12-dind
   before_script:
     - ls
     - echo "starting job..."
