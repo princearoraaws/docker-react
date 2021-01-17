@@ -1,15 +1,17 @@
-sudo: required
-image: docker:latest
-build_job:
+docker-build-master:
+  # Official docker image.
+  image: docker:latest
   stage: build
-
+  services:
+    - docker:dind
   before_script:
     - ls
     - echo "starting job..."
     - docker build -t princearoraaws/docker-react -f Dockerfile.dev .
     - echo job finished
-  script:
-    - docker run -e CI=true princearoraaws/docker-react npm run test
+    
+  #script:
+    #- docker run -e CI=true princearoraaws/docker-react npm run test
   only:
     - master
   tags:
