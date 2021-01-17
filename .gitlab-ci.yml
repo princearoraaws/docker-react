@@ -1,3 +1,4 @@
+sudo: required
 image: docker:latest
 build_job:
   stage: build
