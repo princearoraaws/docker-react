@@ -1,20 +1,15 @@
-docker-build-master:
-  # Official docker image
-  variables:
-    DOCKER_HOST: tcp://localhost:2375
+image: docker:latest
+services:
+  - docker:dind
 
-  image: docker:19.03.12
+build:
   stage: build
-  services:
-    - docker:19.03.12-dind
-  before_script:
-    - ls
-    - echo "starting job..."
-    - docker build -t princearoraaws/docker-react -f Dockerfile.dev .
-    - echo job finished
-    
+  before_install:
+  - docker build -t princearoraaws/docker-react -f ./Dockerfile.dev .
+
   script:
-    - docker run -e CI=true princearoraaws/docker-react npm run test
+  - docker run -e CI=true princearoraaws/docker-react npm run test
+
   only:
     - master
   tags:
