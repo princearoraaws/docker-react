@@ -1,3 +1,15 @@
+.cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - node_modules/
+      - public/
+      - vendor/
+    policy: pull-push
+
+default:
+  cache:
+    extends: .cache
+
 image: docker:latest
 services:
   - docker:dind
