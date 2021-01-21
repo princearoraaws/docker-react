@@ -19,19 +19,7 @@ variables:
   S3_KEY: "" # S3 folder to upload built app
 
 
-build:
-  stage: build
-  before_script:
-  - docker build -t princearoraaws/docker-react -f ./Dockerfile.dev .
 
-  script:
-  - docker run -e CI=true princearoraaws/docker-react npm run test -- --coverage
-
-
-  only:
-    - master
-  tags:
-    - docker
 
 deploy:
   stage: deploy
