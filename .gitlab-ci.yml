@@ -1,6 +1,5 @@
-image: docker:latest
-cache:
-    key: ${CI_COMMIT_REF_SLUG}
+image: docker:stable
+
 
 services:
   - docker:dind
@@ -11,7 +10,7 @@ build:
   - docker build -t princearoraaws/docker-react -f ./Dockerfile.dev .
 
   script:
-  - docker run -e CI=true princearoraaws/docker-react npm run test-- --coverage
+  - docker run -e CI=true princearoraaws/docker-react npm run test -- --coverage
 
   only:
     - master
