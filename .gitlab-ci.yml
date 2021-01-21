@@ -15,7 +15,7 @@ variables:
   AWS_DEFAULT_REGION: "ap-south-1" # Or, wherever you are
   EB_APP_NAME: "docker-react" # ElasticBeanstalk Application Name
   EB_APP_ENV: "DockerReact-env" # ElasticBeanstalk Application Environment
-  S3_BUCKET: "elasticbeanstalk-ap-south-1-877154705175" # S3 bucket for ElasticBeanstalk
+  S3_BUCKET: "s3://elasticbeanstalk-ap-south-1-877154705175/docker-react" # S3 bucket for ElasticBeanstalk
   S3_KEY: "" # S3 folder to upload built app
 
 
@@ -28,8 +28,8 @@ deploy:
   - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
   - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
   - aws configure set region $AWS_DEFAULT_REGION
-  - ~/.local/bin/eb use $EB_APP_ENV
-  - ~/.local/bin/eb deploy  
+  - touch Test.txt
+  - aws s3 cp Test.txt $S3_BUCKET
   #- aws s3 cp build/libs/mySampleApp.war s3://elasticbeanstalk-eu-central-1-11111222222233/mySampleApp-$CI_PIPELINE_ID.war
 
 
