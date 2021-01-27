@@ -10,7 +10,7 @@ stages:
 # Configuration
 variables:
   EB_APP_ENV: "DockerReact-env" # ElasticBeanstalk Application Environment
-
+  CI_DEBUG_TRACE: "true"
 
 build:
   stage: build
@@ -31,12 +31,16 @@ deploy:
   stage: deploy
   #image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
   image:  python:slim
-  script:
+  before_script:
   - pip install awsebcli --upgrade
   - pip install awscli --upgrade
   - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
   - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
   - aws configure set region $AWS_DEFAULT_REGION
+
+  script:
+  - docker build -t princearoraaws/docker-react .
+  - eb init
   - eb status $EB_APP_ENV
   - eb deploy $EB_APP_ENV  
   #- aws s3 cp build/libs/mySampleApp.war s3://elasticbeanstalk-eu-central-1-11111222222233/mySampleApp-$CI_PIPELINE_ID.war
