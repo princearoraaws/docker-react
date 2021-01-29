@@ -1,7 +1,7 @@
-image: python:slim
-services:
-  - docker:stable-dind
-
+image: docker:stable
+# services:
+#   - docker:stable-dind
+    
 # stages:
 #   - build
 #   - deploy
@@ -28,21 +28,20 @@ variables:
 
 deploy:
   stage: deploy
-  #image: registry.gitlab.com/gitlab-org/cloud-deploy/aws-base:latest
-  #image:  python:slim
   before_script:
-#  - apk add --update --no-cache python3 && ln -sf python3 /usr/bin/python
-#  - python3 -m ensurepip
-#  - pip3 install --no-cache --upgrade pip setuptools
-#  - apk add --update --no-cache python py-pip python-dev gcc setuptools
+  - apk add --update --no-cache python3 python3-dev curl gcc libffi-dev libc-dev openssl-dev build-base
+  - curl -O https://bootstrap.pypa.io/get-pip.py
+  - python3 get-pip.py
+  - pip --version
   - pip install awsebcli --upgrade
+  - eb --version
   - pip install awscli --upgrade
   - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
   - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
   - aws configure set region $AWS_DEFAULT_REGION
 
   script:
-  - docker build -t princearoraaws/docker-react .
+#  - docker build -t princearoraaws/docker-react .
   - eb init
   - eb status $EB_APP_ENV
   - eb deploy $EB_APP_ENV 
