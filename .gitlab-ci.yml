@@ -42,7 +42,7 @@ deploy:
 
   script:
 #  - docker build -t princearoraaws/docker-react .
-  - eb init
+  - yes n | eb init
   - echo "eb init done"
   - eb status $EB_APP_ENV
   - eb deploy $EB_APP_ENV 
