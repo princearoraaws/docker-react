@@ -32,4 +32,6 @@ yarn-error.log*
 .travis.yml
 .eslintcache
 /frontend
+.git
+.git/*
 
