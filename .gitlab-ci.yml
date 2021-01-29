@@ -1,4 +1,4 @@
-image: docker:stable
+image: registry:5000/awscli-docker-stable:latest
 # services:
 #   - docker:stable-dind
     
@@ -29,13 +29,13 @@ variables:
 deploy:
   stage: deploy
   before_script:
-  - apk add --update --no-cache python3 python3-dev curl gcc libffi-dev libc-dev openssl-dev build-base
-  - curl -O https://bootstrap.pypa.io/get-pip.py
-  - python3 get-pip.py
-  - pip --version
-  - pip install awsebcli --upgrade
+  # - apk add --update --no-cache python3 python3-dev curl gcc libffi-dev libc-dev openssl-dev build-base
+  # - curl -O https://bootstrap.pypa.io/get-pip.py
+  # - python3 get-pip.py
+  # - pip --version
+  # - pip install awsebcli --upgrade
 #  - eb --version
-  - pip install awscli --upgrade
+  # - pip install awscli --upgrade
   - aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
   - aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
   - aws configure set region $AWS_DEFAULT_REGION
