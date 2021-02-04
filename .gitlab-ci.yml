@@ -2,28 +2,28 @@ image: registry:5000/awscli-docker-stable:latest
 # services:
 #   - docker:stable-dind
     
-# stages:
-#   - build
-#   - deploy
+stages:
+  - build
+  - deploy
 
 # Configuration
 variables:
   EB_APP_ENV: "DockerReact-env" # ElasticBeanstalk Application Environment
   CI_DEBUG_TRACE: "true"
 
-# build:
-#   stage: build
-#   before_script:
-#   - docker build -t princearoraaws/docker-react -f ./Dockerfile.dev .
+build:
+  stage: build
+  before_script:
+  - docker build -t princearoraaws/docker-react -f ./Dockerfile.dev .
 
-#   script:
-#   - docker run -e CI=true princearoraaws/docker-react npm run test -- --coverage
+  script:
+  - docker run -e CI=true princearoraaws/docker-react npm run test -- --coverage
 
 
-#   only:
-#     - master
-#   tags:
-#     - docker
+  only:
+    - feature
+  tags:
+    - docker
 
 
 deploy:
