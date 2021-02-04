@@ -18,6 +18,10 @@ build:
 
   script:
   - docker run -e CI=true princearoraaws/docker-react npm run test -- --coverage
+  - docker login registry:5000 -u my_username -p my_password
+  - docker tag  princearoraaws/docker-react registry:5000/princearoraaws/docker-react
+  - docker push registry:5000/princearoraaws/docker-react
+  - docker logout registry:5000
 
 
   only:
